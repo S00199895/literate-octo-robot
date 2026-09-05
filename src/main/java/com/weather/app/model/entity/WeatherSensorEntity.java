@@ -14,18 +14,26 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "SENSOR_STAT")
+@Table(name = "SENSOR_READING")
 public class WeatherSensorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+//
     private Long sensorId;
+// todo see notes
+//    private String statistic;
+//
+//    private BigDecimal value;
+//
+//    private LocalDateTime timestamp;
 
-    private String statistic;
+    BigDecimal temperature;
 
-    private BigDecimal value;
+    BigDecimal humidity;
 
-    private LocalDateTime timestamp;
+    BigDecimal windSpeed;
+
+    LocalDateTime timestamp;
 }

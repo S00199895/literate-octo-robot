@@ -1,0 +1,32 @@
+package com.weather.app.mapper;
+
+import com.weather.app.dto.WeatherSensorDataCreatedResponse;
+import com.weather.app.dto.WeatherSensorDataRequest;
+import com.weather.app.model.entity.WeatherSensorEntity;
+import org.springframework.stereotype.Component;
+
+@Component
+public class WeatherSensorMapperImpl implements WeatherSensorMapper {
+
+    @Override
+    public WeatherSensorEntity mapSensorDataRequestToEntity(Long id, WeatherSensorDataRequest request) {
+        return WeatherSensorEntity.builder()
+                .sensorId(id)
+                .temperature(request.getTemperature())
+                .humidity(request.getHumidity())
+                .windSpeed(request.getWindSpeed())
+                .timestamp(request.getTimestamp())
+                .build();
+    }
+
+    @Override
+    public WeatherSensorDataCreatedResponse mapSensorDataEntityToCreatedResponse(WeatherSensorEntity entity) {
+        return WeatherSensorDataCreatedResponse.builder()
+                .sensorId(entity.getSensorId())
+                .temperature(entity.getTemperature())
+                .humidity(entity.getHumidity())
+                .windSpeed(entity.getWindSpeed())
+                .timestamp(entity.getTimestamp())
+                .build();
+    }
+}

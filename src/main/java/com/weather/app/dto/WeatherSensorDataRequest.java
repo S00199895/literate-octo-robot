@@ -1,16 +1,15 @@
 package com.weather.app.dto;
 
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Value
+@Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class WeatherSensorDataRequest {
-
-    Long sensorId; //todo should this be on the url instead
 
     BigDecimal temperature;
 

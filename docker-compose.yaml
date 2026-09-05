@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: sensor
+    environment:
+      POSTGRES_DB: sensor
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user
+    ports:
+      - "5432:5432"
