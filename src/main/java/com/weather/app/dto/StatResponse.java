@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Value;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Value
 @Builder
@@ -12,11 +11,18 @@ public class StatResponse {
 
     String statistic;
 
+    String metric;
+
     BigDecimal value;
 
-    LocalDateTime startDate;
+    /*
+    *
+    * BigDecimal temperature
+    *
+    * BigDecimal humidity
+    *
+    * BigDecimal windSpeed
+    * */
 
-    LocalDateTime endDate;
-
-    //Long sensorId; //todo should this be mapped if its already nested?
+    //Long sensorId; //todo should this be mapped if its already nested? - i dont think so
 }

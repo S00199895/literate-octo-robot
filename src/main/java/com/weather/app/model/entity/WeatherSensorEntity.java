@@ -20,7 +20,7 @@ public class WeatherSensorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//
+    //
     private Long sensorId;
 // todo see notes
 //    private String statistic;
@@ -35,5 +35,5 @@ public class WeatherSensorEntity {
 
     BigDecimal windSpeed;
 
-    LocalDateTime timestamp;
+    LocalDateTime readingTimestamp;
 }

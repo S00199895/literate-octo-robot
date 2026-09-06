@@ -2,8 +2,23 @@ package com.weather.app.service;
 
 import com.weather.app.dto.WeatherSensorDataCreatedResponse;
 import com.weather.app.dto.WeatherSensorDataRequest;
+import com.weather.app.dto.WeatherSensorResponse;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 public interface WeatherSensorService {
+
+    /**
+     *
+     * @param sensors
+     * @param stat
+     * @param metrics
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    List<WeatherSensorResponse> getSensorStatistics(List<Long> sensors, String stat, List<String> metrics, LocalDateTime startDate, LocalDateTime endDate);
 
     /**
      * Validates and maps the data and saves to the database

@@ -14,18 +14,20 @@ public interface WeatherSensorController {
 
     /**
      *
-     * @param sensors
-     * @param stats
-     * @param startDate
-     * @param endDate
-     * @return
+     * @param sensors The IDs of the sensors' data to return. If blank, return all sensors
+     * @param stat The statistic to return - required
+     * @param metrics the metrics to return - required
+     * @param startDate the start date to return data from. Optional - if blank, return today's data
+     * @param endDate the end date to return data to. Throws if start date is not supplied with this.
+     * @return The sensors and their statistics for the time period
      */
     @GetMapping
     public ResponseEntity<List<WeatherSensorResponse>> getSensorStatistics(
-            @RequestParam("sensors") List<Long> sensors, //todo should these be arrays or lists?
-            @RequestParam("stats") List<String> stats,
-            @RequestParam("startDate") LocalDateTime startDate,
-            @RequestParam("endDate") LocalDateTime endDate
+            @RequestParam(value = "sensors", required = false) List<Long> sensors, //todo should these be arrays or lists?
+            @RequestParam("stat") String stat,
+            @RequestParam("metrics") List<String> metrics,
+            @RequestParam(value = "startDate", required = false) LocalDateTime startDate,
+            @RequestParam(value = "endDate", required = false) LocalDateTime endDate
             );
 
     /**

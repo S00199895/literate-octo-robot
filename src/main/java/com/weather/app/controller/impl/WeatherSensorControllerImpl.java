@@ -20,8 +20,11 @@ public class WeatherSensorControllerImpl implements WeatherSensorController {
     private final WeatherSensorService weatherSensorService;
 
     @Override
-    public ResponseEntity<List<WeatherSensorResponse>> getSensorStatistics(List<Long> sensors, List<String> stats, LocalDateTime startDate, LocalDateTime endDate) {
-        return null;
+    public ResponseEntity<List<WeatherSensorResponse>> getSensorStatistics(List<Long> sensors, String stat, List<String> metrics, LocalDateTime startDate, LocalDateTime endDate) {
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(weatherSensorService.getSensorStatistics(sensors, stat, metrics, startDate, endDate));
     }
 
     @Override

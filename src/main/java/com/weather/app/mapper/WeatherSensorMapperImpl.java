@@ -15,7 +15,7 @@ public class WeatherSensorMapperImpl implements WeatherSensorMapper {
                 .temperature(request.getTemperature())
                 .humidity(request.getHumidity())
                 .windSpeed(request.getWindSpeed())
-                .timestamp(request.getTimestamp())
+                .readingTimestamp(request.getTimestamp())
                 .build();
     }
 
@@ -26,7 +26,7 @@ public class WeatherSensorMapperImpl implements WeatherSensorMapper {
                 .temperature(entity.getTemperature())
                 .humidity(entity.getHumidity())
                 .windSpeed(entity.getWindSpeed())
-                .timestamp(entity.getTimestamp())
+                .timestamp(entity.getReadingTimestamp())
                 .build();
     }
 }
