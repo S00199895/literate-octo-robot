@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface WeatherSensorRepository extends JpaRepository<WeatherSensorEntity, Long> {
@@ -66,4 +67,6 @@ public interface WeatherSensorRepository extends JpaRepository<WeatherSensorEnti
             @Param("startDate") LocalDateTime startDate, //we'll sort out the nulls in these in code and then pass certain values
             @Param("endDate") LocalDateTime endDate
     );
+
+    Optional<WeatherSensorEntity> findBySensorId(Long sensorId);
 }
