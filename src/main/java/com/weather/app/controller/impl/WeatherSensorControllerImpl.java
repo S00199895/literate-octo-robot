@@ -3,7 +3,7 @@ package com.weather.app.controller.impl;
 import com.weather.app.controller.WeatherSensorController;
 import com.weather.app.dto.WeatherSensorDataCreatedResponse;
 import com.weather.app.dto.WeatherSensorDataRequest;
-import com.weather.app.dto.WeatherSensorResponse;
+import com.weather.app.dto.WeatherSensorStatisticResponse;
 import com.weather.app.service.WeatherSensorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class WeatherSensorControllerImpl implements WeatherSensorController {
     private final WeatherSensorService weatherSensorService;
 
     @Override
-    public ResponseEntity<List<WeatherSensorResponse>> getSensorStatistics(List<Long> sensors, String stat, List<String> metrics, LocalDateTime startDate, LocalDateTime endDate) {
+    public ResponseEntity<List<WeatherSensorStatisticResponse>> getSensorStatistics(final List<Long> sensors, final String stat, final List<String> metrics, final LocalDateTime startDate, final LocalDateTime endDate) {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -28,7 +28,7 @@ public class WeatherSensorControllerImpl implements WeatherSensorController {
     }
 
     @Override
-    public ResponseEntity<WeatherSensorDataCreatedResponse> createSensorStatistic(Long id, WeatherSensorDataRequest weatherSensorDataRequest) {
+    public ResponseEntity<WeatherSensorDataCreatedResponse> createSensorStatistic(final Long id, final WeatherSensorDataRequest weatherSensorDataRequest) {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)

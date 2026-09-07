@@ -28,7 +28,7 @@ public class DatabaseSteps {
 
         final WeatherSensorEntity actual = weatherSensorRepository.findBySensorId(sensorId).get();
 
-        assertThat(actual.getHumidity()).isEqualTo(weatherSensorDataRequest.getHumidity()); //todo fails on the precision here? maybe not a big issue
+        assertThat(actual.getHumidity()).isEqualTo(weatherSensorDataRequest.getHumidity());
         assertThat(actual.getTemperature()).isEqualTo(weatherSensorDataRequest.getTemperature());
         assertThat(actual.getWindSpeed()).isEqualTo(weatherSensorDataRequest.getWindSpeed());
         assertThat(actual.getReadingTimestamp()).isEqualTo(weatherSensorDataRequest.getTimestamp());
@@ -43,12 +43,6 @@ public class DatabaseSteps {
     }
 
     public void seedLatestDataToQuery(WeatherSensorRepository weatherSensorRepository, LocalDateTime latestEndDate) {
-
-        /*
-        * we need 4 say rows
-        * two for each sensor
-        * we'll do average stat in the test
-        * */
 
         weatherSensorRepository.save(
                 WeatherSensorEntity.builder()

@@ -33,4 +33,9 @@ class ValidationServiceImplTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    void test_validateSensorDataRequest_returnsValidationErrorsList() {
+        // todo implement
+    }
 }

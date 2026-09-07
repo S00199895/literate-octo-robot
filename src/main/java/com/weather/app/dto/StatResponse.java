@@ -14,15 +14,4 @@ public class StatResponse {
     String metric;
 
     BigDecimal value;
-
-    /*
-    *
-    * BigDecimal temperature
-    *
-    * BigDecimal humidity
-    *
-    * BigDecimal windSpeed
-    * */
-
-    //Long sensorId; //todo should this be mapped if its already nested? - i dont think so
 }

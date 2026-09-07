@@ -2,7 +2,7 @@ package com.weather.app.controller;
 
 import com.weather.app.dto.WeatherSensorDataCreatedResponse;
 import com.weather.app.dto.WeatherSensorDataRequest;
-import com.weather.app.dto.WeatherSensorResponse;
+import com.weather.app.dto.WeatherSensorStatisticResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +22,8 @@ public interface WeatherSensorController {
      * @return The sensors and their statistics for the time period
      */
     @GetMapping
-    public ResponseEntity<List<WeatherSensorResponse>> getSensorStatistics(
-            @RequestParam(value = "sensors", required = false) List<Long> sensors, //todo should these be arrays or lists?
+    public ResponseEntity<List<WeatherSensorStatisticResponse>> getSensorStatistics(
+            @RequestParam(value = "sensors", required = false) List<Long> sensors,
             @RequestParam("stat") String stat,
             @RequestParam("metrics") List<String> metrics,
             @RequestParam(value = "startDate", required = false) LocalDateTime startDate,

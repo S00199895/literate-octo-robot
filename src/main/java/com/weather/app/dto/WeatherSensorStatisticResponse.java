@@ -8,7 +8,7 @@ import java.util.List;
 
 @Value
 @Builder
-public class WeatherSensorResponse { //todo good name?
+public class WeatherSensorStatisticResponse {
 
     Long id;
 

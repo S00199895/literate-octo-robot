@@ -1,0 +1,41 @@
+{
+  "startDate": "2026-09-05T15:22:06.564733",
+  "endDate": "2026-09-06T15:22:06.564733",
+  "stat": "average",
+  "sensors": [
+    {
+      "sensorId": 1006,
+      "statistics": [
+        {
+          "metric": "temperature",
+          "value": 20
+        },
+        {
+          "metric": "humidity",
+          "value": 10
+        },
+        {
+          "metric": "windSpeed",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "sensorId": 1006,
+      "statistics": [
+        {
+          "metric": "temperature",
+          "value": 20
+        },
+        {
+          "metric": "humidity",
+          "value": 10
+        },
+        {
+          "metric": "windSpeed",
+          "value": 15
+        }
+      ]
+    }
+  ]
+}

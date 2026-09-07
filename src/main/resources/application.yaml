@@ -8,7 +8,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update #todo do liquibase if we have time
+      ddl-auto: update # todo liquibase
     show-sql: true
     properties:
       hibernate:

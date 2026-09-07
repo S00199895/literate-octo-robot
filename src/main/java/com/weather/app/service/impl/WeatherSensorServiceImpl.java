@@ -31,9 +31,8 @@ public class WeatherSensorServiceImpl implements WeatherSensorService {
 
     private final ValidationService validationService;
 
-
     @Override
-    public List<WeatherSensorResponse> getSensorStatistics(List<Long> sensors, String stat, List<String> metrics, LocalDateTime startDate, LocalDateTime endDate) {
+    public List<WeatherSensorStatisticResponse> getSensorStatistics(final List<Long> sensors, final String stat, final List<String> metrics, final LocalDateTime startDate, final LocalDateTime endDate) {
         
         final ValidatedQueryResult validatedQueryResult = validationService.validateSensorQueryParams(stat, metrics, startDate, endDate);
 
@@ -44,71 +43,26 @@ public class WeatherSensorServiceImpl implements WeatherSensorService {
         final LocalDateTime validatedStartDate = validatedQueryResult.getValidatedStartDate();
         final LocalDateTime validatedEndDate = validatedQueryResult.getValidatedEndDate();
 
-        final List<WeatherSensorResponse> weatherSensorResponseList = new ArrayList<>();
+        final List<WeatherSensorStatisticResponse> weatherSensorStatisticResponseList = new ArrayList<>();
         final List<SensorMetric> sensorMetrics;
 
-        //if theres no sensors given, query all sensors data SEPARATELY
-        //so we'll need one query that does all (group by something?)
-
-
-        if (isNull(sensors) || sensors.isEmpty()) { //todo only check tge sensors if there is any
+        if (isNull(sensors) || sensors.isEmpty()) {
             sensorMetrics = weatherSensorRepository.findAllSensorsMetricsBetweenDates(validatedStartDate, validatedEndDate);
-
         } else {
             sensorMetrics = weatherSensorRepository.findSensorMetricsBySensorIdsBetweenDates(sensors.toArray(Long[]::new), validatedStartDate, validatedEndDate);
         }
 
         final List<Long> returnedSensorIds = sensorMetrics.stream().map(SensorMetric::getSensorId).distinct().toList();
 
-        /**
-         * at this stage then, we want to build out our actual response WeatherSensorResponse
-         * has the sensor id, and then the list of stats
-         *
-         * do we want to filter straight away by sensor id, and then make a separate one for each of those
-         * map of sensor id to list of metrics?
-         * because we want to get the average, etc operation of the sensorMetric.value of all of the ones
-         * filter by id first
-         * then you'll get the list of sensor metric per sensor
-         * then start constructing a list out of the operations you wanted (stats)
-         *
-         * depending on the stats given, run separate streams for those in private (?) methods
-         * then add that to the list of stats for the sensor
-         * */
-
         returnedSensorIds.forEach(sensor -> {
-
-//            List<SensorMetric> groupedSensorMetrics;
-
-            //include the metric in this
 
             final List<StatResponse> statistics = new ArrayList<>();
 
-//            stats.forEach(stat -> {
-//
-//                switch (stat) {
-//                    case MIN_STAT:
-//                        statistics.add(StatResponse.builder().statistic(MIN_STAT).value(statService.calculateMin(groupedSensorMetrics)).build());
-//                    case MAX_STAT:
-//                        statistics.add(StatResponse.builder().statistic(MAX_STAT).value(statService.calculateMax(groupedSensorMetrics)).build());
-//                    case AVERAGE_STAT:
-//                        statistics.add(StatResponse.builder().statistic(AVERAGE_STAT).value(statService.calculateAverage(groupedSensorMetrics)).build());
-//                    case SUM_STAT:
-//                        statistics.add(StatResponse.builder().statistic(SUM_STAT).value(statService.calculateSum(groupedSensorMetrics)).build());
-//                }
-//          //todo we only pass one });
-
             metrics.forEach(metric -> {
 
-                /*
-                * now here we want to switch on the metric in the foreach
-                * pass down the operation from the stat
-                * so how are we going to pick which method to use
-                *
-                * if statement
-                * */
                 StatResponse statResponse = null;
                 if (TEMPERATURE_METRIC.equals(metric)) {
-                    final List<BigDecimal> temperatureValues = sensorMetrics.stream() //todo should we be calling sensormetrics again down here?
+                    final List<BigDecimal> temperatureValues = sensorMetrics.stream()
                             .filter(sensorMetric -> sensorMetric.getSensorId().equals(sensor))
                             .map(SensorMetric::getTemperature)
                             .toList();
@@ -133,9 +87,7 @@ public class WeatherSensorServiceImpl implements WeatherSensorService {
                 statistics.add(statResponse);
             });
 
-
-
-            weatherSensorResponseList.add(WeatherSensorResponse
+            weatherSensorStatisticResponseList.add(WeatherSensorStatisticResponse
                     .builder()
                     .id(sensor)
                     .statistics(statistics)
@@ -144,13 +96,11 @@ public class WeatherSensorServiceImpl implements WeatherSensorService {
                     .build());
         });
 
-        return weatherSensorResponseList;
+        return weatherSensorStatisticResponseList;
     }
 
     @Override
-    public WeatherSensorDataCreatedResponse createSensorData(Long id, WeatherSensorDataRequest weatherSensorDataRequest) {
-
-        //todo do you then want to be worrying about different sensors existing?
+    public WeatherSensorDataCreatedResponse createSensorData(final Long id, final WeatherSensorDataRequest weatherSensorDataRequest) {
 
         final List<ValidationError> validationErrors = validationService.validateSensorDataRequest(id, weatherSensorDataRequest);
 

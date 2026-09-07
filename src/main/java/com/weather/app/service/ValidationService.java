@@ -15,15 +15,15 @@ public interface ValidationService {
      * @param metrics
      * @param startDate
      * @param endDate
-     * @return
+     * @return The validated dates and validation errors
      */
     ValidatedQueryResult validateSensorQueryParams(String stat, List<String> metrics, LocalDateTime startDate, LocalDateTime endDate);
 
     /**
      *
-     * @param id
-     * @param weatherSensorDataRequest
-     * @return
+     * @param id the sensor ID
+     * @param weatherSensorDataRequest the request including the metrics and a timestamp
+     * @return a list of validation errors
      */
     List<ValidationError> validateSensorDataRequest(Long id, WeatherSensorDataRequest weatherSensorDataRequest);
 }

@@ -14,11 +14,11 @@ class WeatherSensorMapperImplTest {
 
     @Test
     void test_mapSensorDataRequestToEntity_returnsWeatherSensorEntity() {
-        //todo implement
+        // todo implement
     }
 
     @Test
     void test_mapSensorDataEntityToCreatedResponse_returnsWeatherSensorDataCreatedResponse() {
-        //todo implement
+        // todo implement
     }
 }

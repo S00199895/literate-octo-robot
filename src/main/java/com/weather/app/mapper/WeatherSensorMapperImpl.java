@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class WeatherSensorMapperImpl implements WeatherSensorMapper {
 
     @Override
-    public WeatherSensorEntity mapSensorDataRequestToEntity(Long id, WeatherSensorDataRequest request) {
+    public WeatherSensorEntity mapSensorDataRequestToEntity(final Long id, final WeatherSensorDataRequest request) {
         return WeatherSensorEntity.builder()
                 .sensorId(id)
                 .temperature(request.getTemperature())
@@ -20,7 +20,7 @@ public class WeatherSensorMapperImpl implements WeatherSensorMapper {
     }
 
     @Override
-    public WeatherSensorDataCreatedResponse mapSensorDataEntityToCreatedResponse(WeatherSensorEntity entity) {
+    public WeatherSensorDataCreatedResponse mapSensorDataEntityToCreatedResponse(final WeatherSensorEntity entity) {
         return WeatherSensorDataCreatedResponse.builder()
                 .sensorId(entity.getSensorId())
                 .temperature(entity.getTemperature())

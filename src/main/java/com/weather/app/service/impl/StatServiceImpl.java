@@ -15,7 +15,7 @@ import static com.weather.app.common.Constants.*;
 public class StatServiceImpl implements StatService {
 
     @Override
-    public StatResponse calculateStat(List<BigDecimal> metricValues, String stat, String metric) {
+    public StatResponse calculateStat(final List<BigDecimal> metricValues, final String stat, final String metric) {
 
         BigDecimal value;
 
@@ -28,37 +28,30 @@ public class StatServiceImpl implements StatService {
         };
 
         return StatResponse.builder().statistic(stat).metric(metric).value(value).build();
-        //todo we may need to normalise this a bit but works now and makes sense
-        /* ^^^^^^
-        * check the flow again tomorrow
-        * then add the cases + the date stuff - see the other file for details
-        * then tests, IT
-        * then docs + considerations, won't do
-        * */
     }
 
     @Override
-    public BigDecimal calculateMin(List<BigDecimal> metricValues) {
+    public BigDecimal calculateMin(final List<BigDecimal> metricValues) {
         return metricValues.stream()
                 .min(Comparator.naturalOrder())
                 .get();
     }
 
     @Override
-    public BigDecimal calculateMax(List<BigDecimal> metricValues) {
+    public BigDecimal calculateMax(final List<BigDecimal> metricValues) {
         return metricValues.stream()
                 .max(Comparator.naturalOrder())
                 .get();
     }
 
     @Override
-    public BigDecimal calculateSum(List<BigDecimal> metricValues) {
+    public BigDecimal calculateSum(final List<BigDecimal> metricValues) {
         return metricValues.stream()
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     @Override
-    public BigDecimal calculateAverage(List<BigDecimal> metricValues) {
+    public BigDecimal calculateAverage(final List<BigDecimal> metricValues) {
         return calculateSum(metricValues)
                 .divide(new BigDecimal(String.valueOf(metricValues.size())),
                         RoundingMode.HALF_UP);

@@ -23,22 +23,9 @@ public class ValidationServiceImpl implements ValidationService {
     private final Clock clock = Clock.systemDefaultZone();
 
     @Override
-    public ValidatedQueryResult validateSensorQueryParams(String stat, List<String> metrics, LocalDateTime startDate, LocalDateTime endDate) {
+    public ValidatedQueryResult validateSensorQueryParams(final String stat, final List<String> metrics, final LocalDateTime startDate, final LocalDateTime endDate) {
 
-        /*
-         * sensors - i tihnk we dont need to check this because its just a list of long anyway
-         * mayve check its not negative is that too much validation?
-         *
-         * stat is in the static array - should be an exact match
-         * metrics are in the static array
-         *
-         * startdate has to be greater than a month ago and less than a day ago
-         * if no end date - set end date to now
-         * if no start date give an error
-         * if neither, set start date to a day ago and end date to now
-         * */
-
-        List<ValidationError> validationErrors = new ArrayList<>();
+        final List<ValidationError> validationErrors = new ArrayList<>();
 
         LocalDateTime validatedStartDate = startDate;
         LocalDateTime validatedEndDate = endDate;
@@ -61,22 +48,27 @@ public class ValidationServiceImpl implements ValidationService {
             validatedStartDate = LocalDateTime.now(clock).minusDays(2L);
             validatedEndDate = LocalDateTime.now(clock).minusDays(1L);
         } else {
-            if (isNull(startDate)
-                    || startDate.isBefore(LocalDateTime.now(clock).minusMonths(1L))
-                    || startDate.isAfter(LocalDateTime.now(clock).minusDays(1L))) {
+            if ((isNull(startDate) || isNull(endDate))
+                    || endDate.isBefore(startDate)) {
                 validationErrors.add(ValidationError.builder()
-                        .field("startDate")
-                        .message("startDate must be valid between 1 month and 1 day ago")
+                        .field("startDate, endDate")
+                        .message(String.format("Invalid date(s) - startDate: %s, endDate: %s", startDate, endDate))
                         .build());
-            }
+            } else {
+                if (startDate.isBefore(LocalDateTime.now(clock).minusMonths(1L))
+                        || startDate.isAfter(LocalDateTime.now(clock).minusDays(1L))) {
+                    validationErrors.add(ValidationError.builder()
+                            .field("startDate")
+                            .message("startDate must be valid between 1 month and 1 day ago")
+                            .build());
+                }
 
-            if (isNull(endDate)
-                    || endDate.isBefore(startDate)
-                    || endDate.isAfter(LocalDateTime.now(clock).minusDays(1L))) {
-                validationErrors.add(ValidationError.builder()
-                        .field("endDate")
-                        .message("endDate must be valid between 1 month and 1 day ago")
-                        .build());
+                if (endDate.isAfter(LocalDateTime.now(clock).minusDays(1L))) {
+                    validationErrors.add(ValidationError.builder()
+                            .field("endDate")
+                            .message("endDate must be valid between 1 month and 1 day ago")
+                            .build());
+                }
             }
         }
 
@@ -84,7 +76,7 @@ public class ValidationServiceImpl implements ValidationService {
     }
 
     @Override
-    public List<ValidationError> validateSensorDataRequest(Long id, WeatherSensorDataRequest weatherSensorDataRequest) {
+    public List<ValidationError> validateSensorDataRequest(final Long id, final WeatherSensorDataRequest weatherSensorDataRequest) {
 
         List<ValidationError> validationErrors = new ArrayList<>();
 
@@ -95,13 +87,6 @@ public class ValidationServiceImpl implements ValidationService {
                     .build());
 
             return validationErrors;
-        }
-
-        if (isNull(id)) { //todo dont need this if we have the field being mandatory
-            validationErrors.add(ValidationError.builder()
-                    .field("id")
-                    .message("sensor id cannot be null")
-                    .build());
         }
 
         if (isNull(weatherSensorDataRequest.getTemperature())) {

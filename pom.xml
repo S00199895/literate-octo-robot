@@ -17,6 +17,7 @@
         <springdoc-openapi-starter-webmvc-ui.version>3.1.0</springdoc-openapi-starter-webmvc-ui.version>
         <serenity.version>5.3.11</serenity.version>
         <testcontainers-bom.version>2.0.5</testcontainers-bom.version>
+        <junit-jupiter-api.version>6.1.3</junit-jupiter-api.version>
     </properties>
 
     <dependencies>
@@ -40,7 +41,6 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -62,13 +62,6 @@
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-junit5</artifactId>
             <version>${serenity.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>6.1.3</version>
             <scope>test</scope>
         </dependency>
 
@@ -111,7 +104,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -184,5 +176,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

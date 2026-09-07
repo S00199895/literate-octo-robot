@@ -124,13 +124,5 @@ public class WeatherSensorIT {
                 HttpStatus.OK,
                 latestEndDate
         );
-        /*
-        * figure out how we're gonna manage the times here
-        * */
     }
-    /*
-     * 400 path for this
-     * happy path for the query
-     * docs
-     * */
 }

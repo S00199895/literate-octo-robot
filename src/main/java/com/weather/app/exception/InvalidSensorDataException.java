@@ -10,7 +10,7 @@ public class InvalidSensorDataException extends RuntimeException {
     }
 
     public InvalidSensorDataException(List<ValidationError> validationErrorList) {
-        super(validationErrorList.toString()); //todo best way to do this?
+        super(validationErrorList.toString());
     }
 
     public InvalidSensorDataException(String message, Throwable cause) {

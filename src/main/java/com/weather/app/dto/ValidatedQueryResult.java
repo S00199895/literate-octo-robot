@@ -8,7 +8,7 @@ import java.util.List;
 
 @Value
 @Builder
-public class ValidatedQueryResult { //todo -params?
+public class ValidatedQueryResult {
 
     LocalDateTime validatedStartDate;
 

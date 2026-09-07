@@ -11,9 +11,6 @@ public class SensorMetric {
 
     Long sensorId;
 
-//    BigDecimal value;
-
-
     BigDecimal temperature;
 
     BigDecimal humidity;

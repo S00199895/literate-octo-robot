@@ -247,19 +247,19 @@ public class TestConstants {
 
     public static final List<StatResponse> STAT_RESPONSE_LIST_3 = List.of(STAT_RESPONSE_TEMPERATURE_3, STAT_RESPONSE_HUMIDITY_3, STAT_RESPONSE_WIND_SPEED_3);
 
-    public static final WeatherSensorResponse WEATHER_SENSOR_RESPONSE_1 = WeatherSensorResponse.builder()
+    public static final WeatherSensorStatisticResponse WEATHER_SENSOR_RESPONSE_1 = WeatherSensorStatisticResponse.builder()
             .id(SENSOR_ID_1)
             .startDate(START_DATE_1)
             .endDate(END_DATE_1)
             .statistics(STAT_RESPONSE_LIST_2)
             .build();
 
-    public static final WeatherSensorResponse WEATHER_SENSOR_RESPONSE_2 = WeatherSensorResponse.builder()
+    public static final WeatherSensorStatisticResponse WEATHER_SENSOR_RESPONSE_2 = WeatherSensorStatisticResponse.builder()
             .id(SENSOR_ID_2)
             .startDate(START_DATE_1)
             .endDate(END_DATE_1)
             .statistics(STAT_RESPONSE_LIST_3)
             .build();
 
-    public static final List<WeatherSensorResponse> WEATHER_SENSOR_RESPONSES = List.of(WEATHER_SENSOR_RESPONSE_1, WEATHER_SENSOR_RESPONSE_2);
+    public static final List<WeatherSensorStatisticResponse> WEATHER_SENSOR_RESPONSES = List.of(WEATHER_SENSOR_RESPONSE_1, WEATHER_SENSOR_RESPONSE_2);
 }

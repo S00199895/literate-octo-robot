@@ -3,7 +3,7 @@ package com.weather.app.service.impl;
 import com.weather.app.dto.ValidatedQueryResult;
 import com.weather.app.dto.WeatherSensorDataCreatedResponse;
 import com.weather.app.dto.WeatherSensorDataRequest;
-import com.weather.app.dto.WeatherSensorResponse;
+import com.weather.app.dto.WeatherSensorStatisticResponse;
 import com.weather.app.exception.InvalidSensorDataException;
 import com.weather.app.mapper.WeatherSensorMapper;
 import com.weather.app.model.WeatherSensorRepository;
@@ -69,7 +69,7 @@ class WeatherSensorServiceImplTest {
         when(statServiceMock.calculateStat(HUMIDITY_3_LIST, MIN_STAT, HUMIDITY_METRIC)).thenReturn(STAT_RESPONSE_HUMIDITY_3);
         when(statServiceMock.calculateStat(WIND_SPEED_3_LIST, MIN_STAT, WIND_SPEED_METRIC)).thenReturn(STAT_RESPONSE_WIND_SPEED_3);
 
-        final List<WeatherSensorResponse> actual = cut.getSensorStatistics(SENSOR_IDS_LIST, MIN_STAT, ALL_METRICS, START_DATE_1, END_DATE_1);
+        final List<WeatherSensorStatisticResponse> actual = cut.getSensorStatistics(SENSOR_IDS_LIST, MIN_STAT, ALL_METRICS, START_DATE_1, END_DATE_1);
 
         assertThat(actual).isEqualTo(WEATHER_SENSOR_RESPONSES);
 
@@ -87,7 +87,7 @@ class WeatherSensorServiceImplTest {
 
     @Test
     void test_getSensorStatistics_failsOnValidationAndThrowsInvalidSensorDataException() {
-        //todo implement
+        // todo implement
     }
 
     @Test
@@ -121,7 +121,6 @@ class WeatherSensorServiceImplTest {
 
         when(validationServiceMock.validateSensorDataRequest(null, invalidWeatherSensorDataRequest)).thenReturn(VALIDATION_ERROR_LIST);
 
-        //todo fix validation in both testts, test validation works for query
         assertThatThrownBy(() -> cut.createSensorData(null, invalidWeatherSensorDataRequest))
                 .isInstanceOf(InvalidSensorDataException.class)
                 .hasMessage(VALIDATION_ERRORS_STRING);
