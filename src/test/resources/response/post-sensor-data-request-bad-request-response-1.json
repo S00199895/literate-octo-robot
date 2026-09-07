@@ -1,0 +1,3 @@
+{
+    "errorMessage": "[Field: temperature, Message: temperature cannot be null, Field: windSpeed, Message: Invalid value for windSpeed: -4.00, Field: humidity, Message: Invalid value for humidity: -1.00]"
+}

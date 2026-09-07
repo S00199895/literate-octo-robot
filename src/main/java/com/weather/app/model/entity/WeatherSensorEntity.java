@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Temporal;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -35,5 +36,6 @@ public class WeatherSensorEntity {
 
     BigDecimal windSpeed;
 
+//    @Column(columnDefinition = "TIME")
     LocalDateTime readingTimestamp;
 }

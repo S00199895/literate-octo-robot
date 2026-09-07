@@ -97,7 +97,7 @@ public class ValidationServiceImpl implements ValidationService {
             return validationErrors;
         }
 
-        if (isNull(id)) {
+        if (isNull(id)) { //todo dont need this if we have the field being mandatory
             validationErrors.add(ValidationError.builder()
                     .field("id")
                     .message("sensor id cannot be null")

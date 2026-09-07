@@ -1,0 +1,46 @@
+[
+    {
+        "endDate": "${endDateTimestamp}",
+        "id": 10032,
+        "startDate": "${startDateTimestamp}",
+        "statistics": [
+            {
+                "metric": "temperature",
+                "statistic": "average",
+                "value": 3.00
+            },
+            {
+                "metric": "humidity",
+                "statistic": "average",
+                "value": 48.50
+            },
+            {
+                "metric": "windSpeed",
+                "statistic": "average",
+                "value": 15.00
+            }
+        ]
+    },
+    {
+        "endDate": "${endDateTimestamp}",
+        "id": 71237,
+        "startDate": "${startDateTimestamp}",
+        "statistics": [
+            {
+                "metric": "temperature",
+                "statistic": "average",
+                "value": 25.00
+            },
+            {
+                "metric": "humidity",
+                "statistic": "average",
+                "value": 22.50
+            },
+            {
+                "metric": "windSpeed",
+                "statistic": "average",
+                "value": 15.00
+            }
+        ]
+    }
+]

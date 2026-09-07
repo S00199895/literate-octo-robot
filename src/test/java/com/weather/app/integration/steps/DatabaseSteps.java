@@ -8,6 +8,9 @@ import com.weather.app.model.entity.WeatherSensorEntity;
 import lombok.SneakyThrows;
 import net.serenitybdd.annotations.Step;
 
+import java.time.LocalDateTime;
+
+import static com.weather.app.integration.common.ITestConstants.*;
 import static com.weather.app.integration.steps.CommonSteps.readResourceFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,5 +34,60 @@ public class DatabaseSteps {
         assertThat(actual.getReadingTimestamp()).isEqualTo(weatherSensorDataRequest.getTimestamp());
         assertThat(actual.getSensorId()).isEqualTo(sensorId);
 
+    }
+
+    @Step("Verify the database is still empty")
+    public void verifyDatabaseWasNotUpdated(WeatherSensorRepository weatherSensorRepository) {
+
+        assertThat(weatherSensorRepository.findAll()).isEmpty();
+    }
+
+    public void seedLatestDataToQuery(WeatherSensorRepository weatherSensorRepository, LocalDateTime latestEndDate) {
+
+        /*
+        * we need 4 say rows
+        * two for each sensor
+        * we'll do average stat in the test
+        * */
+
+        weatherSensorRepository.save(
+                WeatherSensorEntity.builder()
+                        .sensorId(SENSOR_ID_1)
+                        .temperature(TEMPERATURE_1)
+                        .humidity(HUMIDITY_1)
+                        .windSpeed(WIND_SPEED_1)
+                        .readingTimestamp(latestEndDate)
+                        .build()
+        );
+
+        weatherSensorRepository.save(
+                WeatherSensorEntity.builder()
+                        .sensorId(SENSOR_ID_1)
+                        .temperature(TEMPERATURE_2)
+                        .humidity(HUMIDITY_2)
+                        .windSpeed(WIND_SPEED_2)
+                        .readingTimestamp(latestEndDate)
+                        .build()
+        );
+
+        weatherSensorRepository.save(
+                WeatherSensorEntity.builder()
+                        .sensorId(SENSOR_ID_2)
+                        .temperature(TEMPERATURE_3)
+                        .humidity(HUMIDITY_3)
+                        .windSpeed(WIND_SPEED_3)
+                        .readingTimestamp(latestEndDate)
+                        .build()
+        );
+
+        weatherSensorRepository.save(
+                WeatherSensorEntity.builder()
+                        .sensorId(SENSOR_ID_2)
+                        .temperature(TEMPERATURE_4)
+                        .humidity(HUMIDITY_4)
+                        .windSpeed(WIND_SPEED_4)
+                        .readingTimestamp(latestEndDate)
+                        .build()
+        );
     }
 }
