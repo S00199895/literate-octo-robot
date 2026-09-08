@@ -34,14 +34,26 @@ where `{id}` is the sensor ID you are creating the data for (this field is requi
 
 Hit the `/weather` endpoint to query existing statistics data for the sensors.
 
+
+The URL is of the form:
+
+`/weather?stat=min&metrics=temperature,windSpeed,humidity&startDate=2026-09-02T15:31:48&endDate=2026-09-06T15:31:48`
+
 The parameters for the endpoint are:
 * stat : String - can only be one of the following values (min,max,average,sum)
 * metrics : String[] - can be one or many of the following values in a comma separated list (temperature,windSpeed,humidity)
-* startDate : Date - the start date to query from - in the form - `2026-09-02T15:31:48`
-* endDate : Date - the end date to query from - in the form - `2026-09-04T15:31:48`
+* startDate : Date - the start date to query from - in the form - `2026-09-02T15:31:48 (YYYY-MM-DD-T-HH:MM:SS)` 
+* endDate : Date - the end date to query from - in the form - `2026-09-04T15:31:48 (YYYY-MM-DD-T-HH:MM:SS)`
 
 ### Restrictions
 
+Validation errors will generate a 400 Bad Request with a response in the form: 
+
+```
+{
+    "errorMessage": "[Field: stat, Message: Invalid stat: su, Field: metrics, Message: Invalid metrics: [temperaure, windSpeed, humidity], Field: startDate, endDate, Message: Invalid date(s) - startDate: null, endDate: 2026-09-07T11:56:48]"
+}
+```
 * Include startDate and endDate or neither. Omitting both will give the latest data (yesterday's data)
 * The startDate must be within a month ago
 * The endDate cannot be within the last day (<strong>Note:</strong> Post data with a timestamp within this range to query your own data efficiently.)
@@ -49,14 +61,3 @@ The parameters for the endpoint are:
 
 Sample swagger inputs for example:
 * ![img.png](img.png)
-
-The (encoded) URL is of the form:
-
-`/weather?stat=min&metrics=temperature%2CwindSpeed%2Chumidity&startDate=2026-09-02T15%3A31%3A48&endDate=2026-09-06T17%3A05%3A00`
-
-
-### Restrictions
-
-* Temperature cannot be null
-* Humidity must be greater than or equal to 0
-* wind speed must be greater than or equal to 0

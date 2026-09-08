@@ -1,7 +1,8 @@
-package com.weather.app.mapper;
+package com.weather.app.mapper.impl;
 
 import com.weather.app.dto.WeatherSensorDataCreatedResponse;
 import com.weather.app.dto.WeatherSensorDataRequest;
+import com.weather.app.mapper.WeatherSensorMapper;
 import com.weather.app.model.entity.WeatherSensorEntity;
 import org.springframework.stereotype.Component;
 

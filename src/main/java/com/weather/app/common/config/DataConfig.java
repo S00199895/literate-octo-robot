@@ -28,7 +28,7 @@ public class DataConfig {
                         .temperature(new BigDecimal("20.00"))
                         .humidity(new BigDecimal("10.00"))
                         .windSpeed(new BigDecimal("15.00"))
-                        .readingTimestamp(LocalDateTime.now().minusDays(1L))
+                        .readingTimestamp(LocalDateTime.now().minusDays(2L))
                         .build()
         );
 
@@ -38,7 +38,7 @@ public class DataConfig {
                         .temperature(new BigDecimal("10.00"))
                         .humidity(new BigDecimal("1.00"))
                         .windSpeed(new BigDecimal("11.00"))
-                        .readingTimestamp(LocalDateTime.now().minusDays(1L))
+                        .readingTimestamp(LocalDateTime.now().minusDays(2L))
                         .build()
         );
 
@@ -48,7 +48,7 @@ public class DataConfig {
                         .temperature(new BigDecimal("25.00"))
                         .humidity(new BigDecimal("40.00"))
                         .windSpeed(new BigDecimal("50.00"))
-                        .readingTimestamp(LocalDateTime.now().minusDays(1L))
+                        .readingTimestamp(LocalDateTime.now().minusDays(2L))
                         .build()
         );
 

@@ -1,5 +1,6 @@
 package com.weather.app.mapper;
 
+import com.weather.app.mapper.impl.WeatherSensorMapperImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
